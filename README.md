@@ -65,3 +65,16 @@ npm run typecheck   # TypeScript em todos os pacotes
 npm test            # regras de horário + API (DynamoDB simulado)
 npm run synth       # gera o CloudFormation sem publicar
 ```
+
+## Só uma página (sem funcionalidades)
+
+A página fica em `pagina/index.html` (edite à vontade). Para publicar só ela:
+
+```bash
+npm install
+cd infra
+npx cdk bootstrap                 # uma vez por conta/região
+npx cdk deploy AgendaiPagina      # imprime PaginaUrl
+```
+
+Com domínio próprio: `npx cdk deploy AgendaiPagina -c domainName=agendai.com.br -c hostedZoneId=Z0123…` (veja o roteiro). Para remover: `npx cdk destroy AgendaiPagina`.

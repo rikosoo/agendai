@@ -3,6 +3,7 @@ import { App } from "aws-cdk-lib";
 import { AgendaiStack } from "../lib/agendai-stack";
 import { CertificateStack } from "../lib/certificate-stack";
 import { GithubOidcStack } from "../lib/github-oidc-stack";
+import { PaginaStack } from "../lib/pagina-stack";
 
 /**
  * Parâmetros (via `-c chave=valor` ou infra/cdk.context.json). Todos opcionais:
@@ -35,6 +36,15 @@ if (domainName && hostedZoneId) {
   });
   cloudFrontCertificate = cert.certificate;
 }
+
+// Só uma página estática (pasta /pagina): npx cdk deploy AgendaiPagina
+new PaginaStack(app, "AgendaiPagina", {
+  env: { account, region },
+  crossRegionReferences: true,
+  domainName,
+  hostedZoneId,
+  certificate: cloudFrontCertificate,
+});
 
 new AgendaiStack(app, "AgendaiStack", {
   env: { account, region },
