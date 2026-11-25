@@ -1,0 +1,145 @@
+:root {
+  --navy: #111b2b;
+  --navy-2: #1d2a40;
+  --orange: #ff9a1f;
+  --orange-d: #b45f00;
+  --cream: #f5f2ec;
+  --card: #fcfbf8;
+  --linha: #e2ded4;
+  --texto: #1b2433;
+  --mudo: #5b6577;
+  --ok: #1d6b3a;
+  --erro: #b3261e;
+  --raio: 12px;
+  --fonte: "Inter", system-ui, sans-serif;
+  --titulo: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream); color: var(--texto); font: 16px/1.55 var(--fonte); }
+h1, h2, h3 { font-family: var(--titulo); color: var(--navy); line-height: 1.15; margin: 0 0 .5em; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); }
+h2 { font-size: 1.5rem; margin-top: 1.6em; }
+h3 { font-size: 1.15rem; }
+a { color: var(--orange-d); }
+code { background: #ece7db; padding: 1px 6px; border-radius: 6px; font-size: .92em; }
+.container { width: min(1120px, 100% - 32px); margin-inline: auto; }
+.principal { padding-block: 32px 64px; min-height: 70vh; }
+.carregando { display: grid; place-items: center; min-height: 100vh; color: var(--mudo); }
+.mudo { color: var(--mudo); }
+.pequeno { font-size: .85rem; }
+.capitalizar::first-letter { text-transform: uppercase; }
+.lead { font-size: 1.15rem; color: var(--mudo); max-width: 60ch; }
+.eyebrow { font: 600 .78rem/1 var(--titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--orange-d); margin: 0 0 12px; }
+
+/* Faixa demo + topo */
+.faixa-demo { background: var(--orange); color: var(--navy); text-align: center; padding: 6px 12px; font-size: .88rem; font-weight: 500; }
+.topo { background: var(--navy); position: sticky; top: 0; z-index: 10; }
+.topo-in { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font: 700 1.3rem var(--titulo); }
+.nav { display: flex; align-items: center; gap: 20px; }
+.nav a:not(.btn) { color: #d6dbe6; text-decoration: none; font-weight: 500; }
+.nav a:not(.btn):hover, .nav a.active { color: #fff; }
+.nav a.active { box-shadow: 0 2px 0 var(--orange); }
+.ola { color: #aab3c5; font-size: .92rem; }
+.menu-btn { display: none; background: none; border: 0; padding: 10px; cursor: pointer; }
+.menu-btn span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; }
+@media (max-width: 800px) {
+  .menu-btn { display: block; }
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--navy-2); flex-direction: column; align-items: flex-start; padding: 16px; gap: 14px; }
+  .nav.aberto { display: flex; }
+}
+
+/* Botões e formulários */
+.btn { display: inline-block; background: var(--orange); color: var(--navy); border: 2px solid var(--orange); border-radius: 999px; padding: 10px 22px; font: 600 1rem var(--fonte); cursor: pointer; text-decoration: none; text-align: center; transition: transform .08s, filter .15s; }
+.btn:hover:not(:disabled) { filter: brightness(1.06); transform: translateY(-1px); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-sec { background: transparent; color: var(--navy); border-color: var(--navy); }
+.topo .btn-sec { color: #fff; border-color: #fff; }
+.btn-peq { padding: 6px 16px; font-size: .92rem; }
+.btn-grande { padding: 14px 30px; font-size: 1.05rem; }
+.btn-bloco { display: block; width: 100%; margin-top: 14px; }
+.link { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer; font: inherit; }
+.form { display: grid; gap: 14px; }
+.form label, .reserva label { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
+input, select, textarea { font: 400 1rem var(--fonte); padding: 10px 12px; border: 1.5px solid #c9c4b8; border-radius: 10px; background: #fff; color: var(--texto); width: 100%; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #1a6fd4; outline-offset: 2px; }
+.grade2 { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) { .grade2 { grid-template-columns: 1fr; } }
+.linha-form { grid-template-columns: 2fr 1fr 1fr auto; align-items: end; }
+@media (max-width: 800px) { .linha-form { grid-template-columns: 1fr 1fr; } }
+.erro { color: var(--erro); background: #fbeae8; padding: 10px 14px; border-radius: 10px; margin: 8px 0; }
+.sucesso { color: var(--ok); background: #e4f3ea; padding: 10px 14px; border-radius: 10px; margin: 8px 0; }
+.vazio { background: var(--card); border: 1.5px dashed var(--linha); border-radius: var(--raio); padding: 22px; color: var(--mudo); text-align: center; }
+fieldset.horarios { border: 1.5px solid var(--linha); border-radius: var(--raio); padding: 10px 16px; }
+fieldset legend { font-weight: 600; padding: 0 6px; }
+.linha-horario { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--linha); }
+.linha-horario:last-child { border: 0; }
+.linha-horario .check { display: flex; align-items: center; gap: 8px; min-width: 120px; }
+.check input { width: auto; }
+.faixa { display: flex; align-items: center; gap: 8px; }
+.faixa input { width: 110px; }
+
+/* Home */
+.hero { padding: 40px 0 20px; max-width: 800px; }
+.acoes { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+.cards3 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.card { background: var(--card); border: 1.5px solid var(--linha); border-radius: var(--raio); padding: 20px; }
+.card .num { font: 600 .85rem var(--titulo); color: var(--orange-d); letter-spacing: .1em; }
+.card p { margin: .4em 0 0; color: var(--mudo); }
+.card-link { display: block; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; }
+.card-link:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(17, 27, 43, .08); }
+.card-link .seta { display: inline-block; margin-top: 12px; color: var(--orange-d); font-weight: 600; }
+.tag { display: inline-block; background: #fde8c8; color: #7a4300; font: 600 .75rem var(--fonte); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip { background: var(--card); border: 1.5px solid var(--linha); border-radius: 999px; padding: 8px 18px; color: var(--navy); text-decoration: none; font-weight: 500; }
+.chip:hover { border-color: var(--orange); background: #fff; }
+.faixa-cta { background: var(--navy); color: #d6dbe6; border-radius: 18px; padding: 32px; margin-top: 48px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.faixa-cta h2 { color: #fff; margin-top: 0; }
+.faixa-cta p { margin: 0; max-width: 56ch; }
+
+/* Explorar / detalhe */
+.filtros { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 20px; }
+@media (max-width: 640px) { .filtros { grid-template-columns: 1fr; } }
+.voltar { display: inline-block; margin-bottom: 16px; text-decoration: none; }
+.detalhe { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start; }
+@media (max-width: 900px) { .detalhe { grid-template-columns: 1fr; } }
+.lista-servicos, .tabela-horarios, .lista-ag { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.servico { width: 100%; display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center; text-align: left; background: var(--card); border: 1.5px solid var(--linha); border-radius: var(--raio); padding: 14px 16px; font: inherit; color: inherit; cursor: pointer; }
+.servico:hover { border-color: var(--orange); }
+.servico.sel { border-color: var(--orange); background: #fff4e3; box-shadow: 0 0 0 2px var(--orange) inset; }
+.preco { font-weight: 700; color: var(--navy); }
+.tabela-horarios li { display: flex; justify-content: space-between; border-bottom: 1px solid var(--linha); padding: 6px 0; }
+.reserva { position: sticky; top: 84px; background: var(--card); border: 1.5px solid var(--linha); border-radius: 16px; padding: 22px; box-shadow: 0 10px 30px rgba(17, 27, 43, .07); }
+.reserva h2 { margin-top: 0; }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; margin: 12px 0; }
+.slot { padding: 9px 0; border: 1.5px solid var(--linha); border-radius: 10px; background: #fff; font: 600 .95rem var(--fonte); cursor: pointer; }
+.slot:hover { border-color: var(--orange); }
+.slot.sel { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* Agendamentos */
+.agendamento { display: flex; align-items: center; gap: 18px; background: var(--card); border: 1.5px solid var(--linha); border-radius: var(--raio); padding: 14px 18px; }
+.agendamento .quando { display: grid; min-width: 130px; }
+.agendamento .quando strong { font: 700 1.4rem var(--titulo); color: var(--navy); }
+.agendamento .quando span { font-size: .85rem; color: var(--mudo); }
+.agendamento .info { display: grid; flex: 1; }
+.passado { opacity: .65; }
+@media (max-width: 640px) { .agendamento { flex-wrap: wrap; } }
+
+/* Auth / painel */
+.caixa-auth { max-width: 420px; margin: 24px auto; }
+.caixa-larga { max-width: 760px; margin: 0 auto; }
+.aviso-demo { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #fff4e3; border: 1.5px solid var(--orange); border-radius: var(--raio); padding: 12px 16px; margin-bottom: 18px; }
+.aviso-demo p { margin: 0; }
+.painel-topo { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
+.painel-topo h1 { margin: 0; }
+.abas { display: flex; gap: 6px; border-bottom: 2px solid var(--linha); margin-bottom: 20px; overflow-x: auto; }
+.abas button { background: none; border: 0; padding: 10px 16px; font: 600 1rem var(--fonte); color: var(--mudo); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+.abas button.ativa { color: var(--navy); border-color: var(--orange); }
+.nav-dia { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nav-dia input { width: auto; }
+
+/* Rodapé */
+.rodape { background: var(--navy); color: #aab3c5; padding: 32px 0; }
+.rodape p { margin: 10px 0 0; }
+.rodape .logo { font-size: 1.1rem; }

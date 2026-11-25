@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write # OIDC: credenciais temporárias, sem access key
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build:frontend
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: sa-east-1
+      - name: CDK deploy
+        working-directory: infra
+        run: >
+          npx cdk deploy AgendaiStack --require-approval never
+          ${{ vars.DOMAIN_NAME && format('-c domainName={0} -c hostedZoneId={1}', vars.DOMAIN_NAME, vars.HOSTED_ZONE_ID) || '' }}
+          ${{ vars.ALERT_EMAIL && format('-c alertEmail={0}', vars.ALERT_EMAIL) || '' }}
+          ${{ vars.BUDGET_USD && format('-c budgetUsd={0}', vars.BUDGET_USD) || '' }}

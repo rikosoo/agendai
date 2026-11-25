@@ -1,0 +1,16 @@
+{
+  "name": "agendai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agendaí — agendamento online para salões e consultórios, pronto para subir na AWS",
+  "workspaces": ["shared", "backend", "frontend", "infra"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "npm run dev -w frontend",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build:frontend": "npm run build -w frontend",
+    "synth": "npm run build:frontend && npm run synth -w infra",
+    "deploy": "npm run build:frontend && npm run deploy -w infra --"
+  }
+}
